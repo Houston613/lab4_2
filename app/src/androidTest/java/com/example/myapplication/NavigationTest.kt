@@ -21,83 +21,98 @@ class NavigationTest {
     fun testAbout() {
         launchActivity<MainActivity>()
         openAbout()
-        Espresso.onView(ViewMatchers.withId(R.id.activity_about))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        aboutOnScreen()
     }
 
     @Test
     fun testFromFirstToSecond() {
         launchActivity<MainActivity>()
+        fragment1OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToSecond)).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(R.id.fragment2))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.activity_main))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.bnToFirst))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.bnToThird))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        fragment2OnScreen()
+
     }
 
     @Test
     fun testFromSecondToFirst() {
         launchActivity<MainActivity>()
+        fragment1OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToSecond)).perform(ViewActions.click())
+        fragment2OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToFirst)).perform(ViewActions.click())
+        fragment1OnScreen()
 
-        Espresso.onView(ViewMatchers.withId(R.id.fragment1))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.activity_main))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.bnToSecond))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     @Test
     fun testFromSecondToThird(){
         launchActivity<MainActivity>()
+        fragment1OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToSecond)).perform(ViewActions.click())
+        fragment2OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToThird)).perform(ViewActions.click())
-
-        Espresso.onView(ViewMatchers.withId(R.id.fragment3))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.activity_main))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.bnToFirst))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.bnToSecond))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        fragment3OnScreen()
     }
 
     @Test
     fun testFromThirdToFirst(){
         launchActivity<MainActivity>()
+        fragment1OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToSecond)).perform(ViewActions.click())
+        fragment2OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToThird)).perform(ViewActions.click())
+        fragment3OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToFirst)).perform(ViewActions.click())
+        fragment1OnScreen()
 
-        Espresso.onView(ViewMatchers.withId(R.id.fragment1))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.activity_main))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.bnToSecond))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     @Test
     fun testFromThirdToSecond(){
         launchActivity<MainActivity>()
+        fragment1OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToSecond)).perform(ViewActions.click())
+        fragment2OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToThird)).perform(ViewActions.click())
+        fragment3OnScreen()
         Espresso.onView(ViewMatchers.withId(R.id.bnToSecond)).perform(ViewActions.click())
-
-        Espresso.onView(ViewMatchers.withId(R.id.fragment2))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        fragment2OnScreen()
+    }
+    private fun fragment1OnScreen() {
         Espresso.onView(ViewMatchers.withId(R.id.activity_main))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.fragment1))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.bnToSecond))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    private fun fragment2OnScreen() {
+        Espresso.onView(ViewMatchers.withId(R.id.activity_main))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.fragment2))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.bnToFirst))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.bnToThird))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    private fun fragment3OnScreen() {
+        Espresso.onView(ViewMatchers.withId(R.id.activity_main))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.fragment3))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.bnToFirst))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.bnToSecond))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    private fun aboutOnScreen() {
+        Espresso.onView(ViewMatchers.withId(R.id.activity_about))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withId(R.id.tvAbout))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }
